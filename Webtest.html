@@ -1,44 +1,670 @@
+
+
+
+```html
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>My Test Website</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Golden Spoon Restaurant</title>
+
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
         body {
-            font-family: Arial;
-            text-align: center;
-            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+            background: #fffaf3;
+            color: #333;
         }
-        h1 {
-            color: blue;
+
+        /* NAVBAR */
+        nav {
+            background: #3b1f12;
+            padding: 18px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
-        button {
-            padding: 10px 20px;
-            font-size: 16px;
-            background-color: green;
+
+        .logo {
+            color: #f4b942;
+            font-size: 26px;
+            font-weight: bold;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+        }
+
+        nav a {
             color: white;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        nav a:hover {
+            color: #f4b942;
+        }
+
+        /* HERO */
+        .hero {
+            min-height: 90vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(135deg, #3b1f12, #7b3f00);
+            color: white;
+            padding: 40px 20px;
+        }
+
+        .hero-content {
+            max-width: 750px;
+        }
+
+        .hero h1 {
+            font-size: 60px;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 20px;
+            line-height: 1.7;
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #f4b942;
+            color: #3b1f12;
+            padding: 14px 28px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: white;
+            transform: translateY(-3px);
+        }
+
+        /* GENERAL */
+        section {
+            padding: 80px 8%;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 45px;
+        }
+
+        .section-title h2 {
+            font-size: 38px;
+            color: #3b1f12;
+            margin-bottom: 10px;
+        }
+
+        .section-title p {
+            color: #777;
+        }
+
+        /* ABOUT */
+        .about {
+            display: flex;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .about-box {
+            flex: 1;
+        }
+
+        .about-box h3 {
+            font-size: 30px;
+            color: #7b3f00;
+            margin-bottom: 20px;
+        }
+
+        .about-box p {
+            line-height: 1.8;
+            color: #555;
+        }
+
+        .about-card {
+            background: #3b1f12;
+            color: white;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+        }
+
+        .about-card h3 {
+            color: #f4b942;
+            margin-bottom: 15px;
+        }
+
+        /* MENU */
+        .menu {
+            background: #f5eadc;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .menu-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: 0.3s;
+        }
+
+        .menu-card:hover {
+            transform: translateY(-8px);
+        }
+
+        .food-icon {
+            font-size: 50px;
+            margin-bottom: 15px;
+        }
+
+        .menu-card h3 {
+            color: #3b1f12;
+            margin-bottom: 10px;
+        }
+
+        .menu-card p {
+            color: #777;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+
+        .price {
+            color: #c17a00;
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        /* SPECIAL */
+        .special {
+            text-align: center;
+        }
+
+        .special-box {
+            max-width: 700px;
+            margin: auto;
+            background: #3b1f12;
+            color: white;
+            padding: 50px;
+            border-radius: 20px;
+        }
+
+        .special-box h3 {
+            color: #f4b942;
+            font-size: 30px;
+            margin-bottom: 15px;
+        }
+
+        .special-price {
+            font-size: 35px;
+            margin: 20px 0;
+        }
+
+        /* RESERVATION */
+        .reservation {
+            background: #f5eadc;
+        }
+
+        form {
+            max-width: 700px;
+            margin: auto;
+            background: white;
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #3b1f12;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 15px;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
             border: none;
+            border-radius: 30px;
+            background: #7b3f00;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
             cursor: pointer;
         }
+
         button:hover {
-            background-color: darkgreen;
+            background: #3b1f12;
+        }
+
+        /* CONTACT */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            text-align: center;
+        }
+
+        .contact-card {
+            background: #f5eadc;
+            padding: 30px;
+            border-radius: 15px;
+        }
+
+        .contact-card span {
+            font-size: 35px;
+        }
+
+        .contact-card h3 {
+            margin: 15px 0 10px;
+            color: #3b1f12;
+        }
+
+        .contact-card p {
+            color: #666;
+        }
+
+        /* FOOTER */
+        footer {
+            background: #3b1f12;
+            color: white;
+            text-align: center;
+            padding: 30px;
+        }
+
+        footer span {
+            color: #f4b942;
+        }
+
+        /* MOBILE */
+        @media (max-width: 768px) {
+
+            nav {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+
+            .hero h1 {
+                font-size: 42px;
+            }
+
+            .about {
+                flex-direction: column;
+            }
+
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
+
 <body>
 
-    <h1>Hello, this is my test website 🚀</h1>
-    <p>Click the button below:</p>
+    <!-- NAVIGATION -->
+    <nav>
+        <div class="logo">🍽 Golden Spoon</div>
 
-    <button onclick="showMessage()">Click Me</button>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#menu">Menu</a></li>
+            <li><a href="#reservation">Reservation</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
 
+
+    <!-- HOME -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+
+            <h1>Welcome to Golden Spoon</h1>
+
+            <p>
+                Delicious food, warm atmosphere, and unforgettable moments.
+                Experience freshly prepared dishes made with passion.
+            </p>
+
+            <a href="#menu" class="btn">View Our Menu</a>
+
+        </div>
+    </section>
+
+
+    <!-- ABOUT -->
+    <section id="about">
+
+        <div class="section-title">
+            <h2>About Us</h2>
+            <p>Good food brings people together.</p>
+        </div>
+
+        <div class="about">
+
+            <div class="about-box">
+                <h3>Our Story</h3>
+
+                <p>
+                    Golden Spoon Restaurant is a modern restaurant
+                    dedicated to serving delicious meals made from
+                    fresh ingredients.
+                </p>
+
+                <br>
+
+                <p>
+                    Our chefs combine traditional flavors with modern
+                    cooking techniques to create food that everyone
+                    can enjoy.
+                </p>
+            </div>
+
+            <div class="about-box about-card">
+                <h3>Why Choose Us?</h3>
+
+                <p>✓ Fresh Ingredients</p>
+                <p>✓ Friendly Service</p>
+                <p>✓ Comfortable Environment</p>
+                <p>✓ Affordable Prices</p>
+                <p>✓ Delicious Food</p>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- MENU -->
+    <section class="menu" id="menu">
+
+        <div class="section-title">
+            <h2>Our Menu</h2>
+            <p>Choose your favorite dish.</p>
+        </div>
+
+        <div class="menu-grid">
+
+            <div class="menu-card">
+                <div class="food-icon">🍔</div>
+                <h3>Classic Burger</h3>
+                <p>
+                    Juicy beef burger with fresh vegetables,
+                    cheese and special sauce.
+                </p>
+                <div class="price">$6.50</div>
+            </div>
+
+            <div class="menu-card">
+                <div class="food-icon">🍕</div>
+                <h3>Cheese Pizza</h3>
+                <p>
+                    Crispy pizza topped with tomato sauce,
+                    mozzarella cheese and fresh herbs.
+                </p>
+                <div class="price">$8.00</div>
+            </div>
+
+            <div class="menu-card">
+                <div class="food-icon">🍝</div>
+                <h3>Italian Pasta</h3>
+                <p>
+                    Homemade pasta served with creamy sauce
+                    and fresh vegetables.
+                </p>
+                <div class="price">$7.50</div>
+            </div>
+
+            <div class="menu-card">
+                <div class="food-icon">🍗</div>
+                <h3>Grilled Chicken</h3>
+                <p>
+                    Tender grilled chicken served with vegetables
+                    and our special sauce.
+                </p>
+                <div class="price">$9.00</div>
+            </div>
+
+            <div class="menu-card">
+                <div class="food-icon">🥗</div>
+                <h3>Fresh Salad</h3>
+                <p>
+                    Fresh vegetables with a light and delicious
+                    homemade dressing.
+                </p>
+                <div class="price">$5.00</div>
+            </div>
+
+            <div class="menu-card">
+                <div class="food-icon">🍰</div>
+                <h3>Chocolate Cake</h3>
+                <p>
+                    Soft chocolate cake served with creamy
+                    chocolate topping.
+                </p>
+                <div class="price">$4.50</div>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- SPECIAL OFFER -->
+    <section class="special">
+
+        <div class="section-title">
+            <h2>Today's Special</h2>
+        </div>
+
+        <div class="special-box">
+
+            <h3>Golden Chicken Set</h3>
+
+            <p>
+                Grilled chicken + French fries + fresh salad
+                + soft drink
+            </p>
+
+            <div class="special-price">$12.99</div>
+
+            <a href="#reservation" class="btn">
+                Order / Reserve
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- RESERVATION -->
+    <section class="reservation" id="reservation">
+
+        <div class="section-title">
+            <h2>Make a Reservation</h2>
+            <p>Reserve your table today.</p>
+        </div>
+
+        <form id="reservationForm">
+
+            <div class="form-group">
+                <label for="name">Your Name</label>
+                <input
+                    type="text"
+                    id="name"
+                    placeholder="Enter your name"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="Enter your email"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="date">Date</label>
+                <input
+                    type="date"
+                    id="date"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="people">Number of People</label>
+
+                <select id="people">
+                    <option>1 Person</option>
+                    <option>2 People</option>
+                    <option>3 People</option>
+                    <option>4 People</option>
+                    <option>5 People</option>
+                    <option>6+ People</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="message">Special Request</label>
+
+                <textarea
+                    id="message"
+                    placeholder="Write your request..."
+                ></textarea>
+            </div>
+
+            <button type="submit">
+                Reserve Table
+            </button>
+
+        </form>
+
+    </section>
+
+
+    <!-- CONTACT -->
+    <section id="contact">
+
+        <div class="section-title">
+            <h2>Contact Us</h2>
+            <p>We would love to hear from you.</p>
+        </div>
+
+        <div class="contact-grid">
+
+            <div class="contact-card">
+                <span>📍</span>
+                <h3>Location</h3>
+                <p>123 Restaurant Street<br>Phnom Penh, Cambodia</p>
+            </div>
+
+            <div class="contact-card">
+                <span>📞</span>
+                <h3>Phone</h3>
+                <p>+855 12 345 678</p>
+            </div>
+
+            <div class="contact-card">
+                <span>⏰</span>
+                <h3>Opening Hours</h3>
+                <p>Monday - Sunday<br>10:00 AM - 10:00 PM</p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- FOOTER -->
+    <footer>
+
+        <p>
+            © 2026 <span>Golden Spoon Restaurant</span>.
+            All Rights Reserved.
+        </p>
+
+    </footer>
+
+
+    <!-- JAVASCRIPT -->
     <script>
-        function showMessage() {
-            alert("You clicked the button!");
-        }
+
+        const form = document.getElementById("reservationForm");
+
+        form.addEventListener("submit", function(event) {
+
+            event.preventDefault();
+
+            const name = document.getElementById("name").value;
+
+            alert(
+                "Thank you, " + name +
+                "! Your reservation request has been received."
+            );
+
+            form.reset();
+        });
+
     </script>
-   <p>
-	http://localhost:8081/Webtest.html
-   </p>
 
 </body>
 </html>
+```
